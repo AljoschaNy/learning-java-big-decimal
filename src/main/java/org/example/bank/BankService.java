@@ -7,7 +7,7 @@ import java.util.List;
 public class BankService {
 
     public String getCustomerNumberOfNewCustomer(Client client) {
-        Account account = new Account("d1234", new BigDecimal("10000.00"), client);
+        Account account = new Account("d1234", new BigDecimal("10000.00"), new Client[]{client});
         return account.getAccountNumber();
     }
 

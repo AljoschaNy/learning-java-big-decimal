@@ -1,23 +1,26 @@
 package org.example.bank;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Account {
     private String accountNumber;
     private BigDecimal accountBalance;
-    private Client client;
+    private Client[] clients;
 
-    public Account(String accountNumber, BigDecimal accountBalance, Client client) {
+
+    public Account(String accountNumber, BigDecimal accountBalance, Client[] clients) {
         this.accountNumber = accountNumber;
         this.accountBalance = accountBalance;
-        this.client = client;
+        this.clients = clients;
     }
 
-    public void depositMoney(BigDecimal amount){
+    public void depositMoney(BigDecimal amount) {
         this.accountBalance.add(amount);
     }
-    public void withdrawMoney(BigDecimal amount){
+
+    public void withdrawMoney(BigDecimal amount) {
         this.accountBalance.subtract(amount);
     }
 
@@ -37,12 +40,12 @@ public class Account {
         this.accountBalance = accountBalance;
     }
 
-    public Client getClient() {
-        return client;
+    public Client[] getClients() {
+        return clients;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClients(Client[] clients) {
+        this.clients = clients;
     }
 
     @Override
@@ -50,12 +53,14 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(accountBalance, account.accountBalance) && Objects.equals(client, account.client);
+        return Objects.equals(accountNumber, account.accountNumber) && Objects.equals(accountBalance, account.accountBalance) && Arrays.equals(clients, account.clients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountNumber, accountBalance, client);
+        int result = Objects.hash(accountNumber, accountBalance);
+        result = 31 * result + Arrays.hashCode(clients);
+        return result;
     }
 
     @Override
@@ -63,7 +68,7 @@ public class Account {
         return "Account{" +
                 "accountNumber='" + accountNumber + '\'' +
                 ", accountBalance=" + accountBalance +
-                ", client=" + client +
+                ", clients=" + Arrays.toString(clients) +
                 '}';
     }
 }
