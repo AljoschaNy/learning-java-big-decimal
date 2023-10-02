@@ -14,6 +14,13 @@ public class Account {
         this.client = client;
     }
 
+    public void depositMoney(BigDecimal amount){
+        this.accountBalance.add(amount);
+    }
+    public void withdrawMoney(BigDecimal amount){
+        this.accountBalance.subtract(amount);
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
